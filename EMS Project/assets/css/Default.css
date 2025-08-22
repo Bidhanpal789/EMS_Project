@@ -1,0 +1,21 @@
+﻿/* Custom styles can go here */
+.hero {
+    padding: 150px 0 100px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.feature-card {
+    height: 100%;
+    transition: transform 0.3s;
+}
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+    }
+
+.testimonial-card {
+    height: 100%;
+}
+#lnkLearnMore{
+    box-shadow:rgba(0,0,0,0.4);
+}

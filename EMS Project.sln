@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36109.1 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "EMS Project", "EMS Project\", "{4DE14E48-8DA0-897E-E41A-447BA902EB98}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.7.2"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_59295"
+		Debug.AspNetCompiler.PhysicalPath = "EMS Project\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_59295\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_59295"
+		Release.AspNetCompiler.PhysicalPath = "EMS Project\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_59295\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "59295"
+		SlnRelativePath = "EMS Project\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4DE14E48-8DA0-897E-E41A-447BA902EB98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DE14E48-8DA0-897E-E41A-447BA902EB98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {253CC5DE-F25A-4A82-897C-2342CC705C74}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,391 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Dashboard.master.cs" Inherits="_src_Dashboard_Dashboard" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        <asp:ContentPlaceHolder ID="TitleContent" runat="server"></asp:ContentPlaceHolder>
+    </title>
+
+    <link href="../../assets/pics/favicon.png" type="image/x-icon" rel="icon" />
+
+    <!-- Common Styles -->
+    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../assets/css/DashMaster.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <asp:ContentPlaceHolder ID="HeaderStyles" runat="server"></asp:ContentPlaceHolder>
+
+    <style>
+        /* Preloader Styles */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+            .preloader.hidden {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Mobile Sidebar Styles */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                left: -250px;
+                top: 0;
+                bottom: 0;
+                width: 250px;
+                z-index: 1050;
+                transition: left 0.3s ease;
+                background: #ffffff;
+                color: white;
+                overflow-y: auto;
+            }
+
+                .sidebar.show {
+                    left: 0;
+                }
+
+            .sidebar-backdrop {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0,0,0,0.5);
+                z-index: 1040;
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .fixed-bottom {
+                position: relative !important;
+                width: 100% !important;
+                bottom: 0 !important;
+            }
+        }
+
+        /* Desktop Styles */
+        @media (min-width: 769px) {
+            .sidebar {
+                position: fixed;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 250px;
+                z-index: 1000;
+                background: #ffffff;
+                color: white;
+                overflow-y: auto;
+            }
+
+            .main-content {
+                margin-left: 250px;
+            }
+
+            .sidebar-backdrop {
+                display: none !important;
+                width: 75vw;
+            }
+        }
+    </style>
+</head>
+<body style="width: 100vw">
+
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <form id="form1" runat="server">
+        <!-- Sidebar Backdrop (for mobile) -->
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+                <i class="fas fa-graduation-cap fs-2 pe-3 text-primary"></i>
+                <h2 class="text-primary">EMS Dashboard</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <nav class="sidebar-menu">
+                    <!-- Navigation items -->
+                    <a href="../Dashboard/Dashboard.aspx" class="menu-item" onclick="aDash_click">
+                        <i class="fas fa-home"></i>
+                        <span>Dashboard</span>
+                    </a>
+
+                    <a href="ExamSchedule.aspx" class="menu-item" onclick="aExamS_click">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Exam Schedule</span>
+                    </a>
+
+                    <a href="Students.aspx" class="menu-item" onclick="aStudent_click">
+                        <i class="fa fa-user"></i>
+                        <span>Students</span>
+                    </a>
+
+                    <a href="Invigilators.aspx" class="menu-item" onclick="aInvi_click">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Invigilators</span>
+                    </a>
+
+                    <a href="ExamDetails1.aspx" class="menu-item" onclick="aExamD_click">
+                        <i class="fas fa-book-open"></i>
+                        <span>Paper Details</span>
+                    </a>
+
+                    <a href="Roomdetails.aspx" class="menu-item" onclick="aRoomD_click">
+                        <i class="fas fa-hotel"></i>
+                        <span>Room Details</span>
+                    </a>
+
+                    <a href="Reports.aspx" class="menu-item" onclick="aReport_click">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Reports</span>
+                    </a>
+
+                    <!-- Admin Dropdown at bottom -->
+                    <div class="fixed-bottom">
+                        <hr>
+                        <div class="dropdown admin-dropdown">
+                            <button class="btn btn-link text-decoration-none dropdown-toggle"
+                                type="button"
+                                id="adminDropdown"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="fas fa-user-shield ps-3 pe-2"></i>
+                                <asp:Label ID="lblUser1" CssClass="fw-bold" Text="" runat="server" />
+                            </button>
+
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="adminDropdown">
+                                <li>
+                                    <div class="dropdown-header">
+                                        <asp:Label CssClass="dropdown-item-text" ID="lblMail2" Text="" runat="server" />
+                                    </div>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="Profile.aspx">
+                                        <i class="fas fa-user me-2"></i>Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="Settings.aspx">
+                                        <i class="fas fa-cog me-2"></i>Settings
+                                    </a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <asp:LinkButton ID="LinkButton1" CssClass="text-decoration-none text-white dropdown-item" runat="server" OnClick="lnkLogout_Click">
+            <i class="fas fa-sign-out-alt"></i> Logout
+                                    </asp:LinkButton>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-graduation-cap"></i>
+                <h2>EMS Dashboard</h2>
+                <button type="button" class="btn-close btn-close-white d-md-none sidebar-close"></button>
+            </div>
+            <nav class="sidebar-menu">
+                <!-- Navigation items -->
+                <a href="../Dashboard/Dashboard.aspx" id="MyDash" class="menu-item">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="ExamSchedule.aspx" id="a-exam" class="menu-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Exam Schedule</span>
+                </a>
+
+                <a href="Students.aspx" id="a-student" class="menu-item">
+                    <i class="fa fa-user"></i>
+                    <span>Students</span>
+                </a>
+
+                <a href="Invigilators.aspx" id="a-invi" class="menu-item">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Invigilators</span>
+                </a>
+
+                <a href="ExamDetails1.aspx" id="a-edetails" class="menu-item">
+                    <i class="fas fa-book-open"></i>
+                    <span>Paper Details</span>
+                </a>
+
+                <a href="Roomdetails.aspx" id="a-roomdetails" class="menu-item">
+                    <i class="fas fa-hotel"></i>
+                    <span>Room Details</span>
+                </a>
+
+                <a href="Reports.aspx" id="a-report" class="menu-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Reports</span>
+                </a>
+
+                <!-- Admin Dropdown at bottom -->
+                <div class="fixed-bottom">
+                    <hr>
+                    <div class="dropdown admin-dropdown">
+                        <button class="btn btn-link text-decoration-none dropdown-toggle"
+                            type="button"
+                            id="adminDropdown"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="fas fa-user-shield ps-3 pe-2"></i>
+                            <asp:Label ID="lblUser" CssClass="fw-bold" Text="" runat="server" />
+                        </button>
+
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="adminDropdown">
+                            <li>
+                                <div class="dropdown-header">
+                                    <asp:Label CssClass="dropdown-item-text" ID="lblMail" Text="" runat="server" />
+                                </div>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="Profile.aspx">
+                                    <i class="fas fa-user me-2"></i>Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="Settings.aspx">
+                                    <i class="fas fa-cog me-2"></i>Settings
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <asp:LinkButton ID="lnkLogout" CssClass="text-decoration-none text-white dropdown-item" runat="server" OnClick="lnkLogout_Click">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </asp:LinkButton>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="header" style="width: 100%">
+                <div class="header-left text">
+                    <a class="btn pe-2 text-start" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                    <asp:ContentPlaceHolder ID="DashboardHeader" runat="server"></asp:ContentPlaceHolder>
+                </div>
+
+            </header>
+
+            <!-- Main Content Area -->
+            <main class="container-fluid p-4 bg-color">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+            </main>
+        </div>
+
+        <!-- Scripts -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <asp:ContentPlaceHolder ID="FooterScripts" runat="server"></asp:ContentPlaceHolder>
+    </form>
+
+    <script>
+        $(document).ready(function () {
+            // Hide preloader
+            setTimeout(function () {
+                $('.preloader').addClass('hidden');
+            }, 1000);
+
+            // Initialize sidebar state
+            function initSidebar() {
+                if ($(window).width() >= 768) {
+                    $('#sidebar').removeClass('show');
+                    //$('.sidebar-backdrop').hide();
+                } else {
+                    $('#sidebar').addClass('show');
+                    $('ba')
+                }
+            }
+
+            // Call on load and on resize
+            initSidebar();
+            $(window).resize(initSidebar);
+
+            // Sidebar toggle functionality
+            $('#sidebarToggle').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $('#sidebar').toggleClass('show');
+                $('.sidebar-backdrop').toggle();
+            });
+
+            // Close sidebar when clicking close button or backdrop
+            $('.sidebar-close, .sidebar-backdrop').click(function (e) {
+                e.preventDefault();
+                $('#sidebar').removeClass('show');
+                $('.sidebar-backdrop').hide();
+
+            });
+
+            // Close sidebar when clicking on menu items (mobile only)
+            $('.menu-item').click(function () {
+                if ($(window).width() <= 768) {
+                    $('#sidebar').removeClass('show');
+
+
+                }
+            });
+        });
+    </script>
+</body>
+</html>

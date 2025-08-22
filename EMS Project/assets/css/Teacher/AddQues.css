@@ -1,0 +1,40 @@
+﻿.question-form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.option-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+    .option-item input[type="radio"] {
+        margin-right: 15px;
+    }
+
+    .option-item .form-control {
+        flex-grow: 1;
+    }
+
+    .option-item .btn-remove {
+        margin-left: 10px;
+        color: #dc3545;
+        cursor: pointer;
+    }
+
+.btn-add-option {
+    margin-bottom: 20px;
+}
+
+.form-section {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+    .form-section:last-child {
+        border-bottom: none;
+    }
