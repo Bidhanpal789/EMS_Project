@@ -1,0 +1,45 @@
+﻿body {
+    height: 100vh;
+}
+
+.stat-card {
+    border-radius: 8px;
+    padding: 20px;
+    color: white;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+    .stat-card i {
+        font-size: 2.5rem;
+        opacity: 0.8;
+    }
+
+    .stat-card .value {
+        font-size: 1.8rem;
+        font-weight: bold;
+    }
+
+    .stat-card .label {
+        opacity: 0.9;
+        font-size: 0.9rem;
+    }
+
+.recent-activity {
+    list-style: none;
+    padding: 0;
+}
+
+    .recent-activity li {
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+        .recent-activity li:last-child {
+            border-bottom: none;
+        }
+
+.activity-time {
+    font-size: 0.8rem;
+    color: #6c757d;
+}

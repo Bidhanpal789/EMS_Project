@@ -1,0 +1,149 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Teacher.master.cs" Inherits="src_Teacher_Teacher" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        <asp:ContentPlaceHolder ID="TitleContent" runat="server"></asp:ContentPlaceHolder>
+    </title>
+
+    <link href="../../assets/pics/favicon.png" type="image/x-icon" rel="icon" />
+
+
+    <!-- Common Styles -->
+    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../assets/css/DashMaster.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <asp:ContentPlaceHolder ID="HeaderStyles" runat="server"></asp:ContentPlaceHolder>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body style="width: 100vw">
+
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+
+
+    <form id="form1" runat="server">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-graduation-cap"></i>
+                <h2>EMS Dashboard</h2>
+            </div>
+            <nav class="sidebar-menu">
+                <!-- Navigation items -->
+                <a href="../Student/Dashboard.aspx" id="MyDash" class="menu-item ">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+
+
+
+                <a href="AddQues.aspx" id="a-edetails" class="menu-item ">
+                    <i class="fas fa-book-open"></i>
+                    <span>Add Question</span>
+                </a>
+
+
+
+
+                <!-- Admin Dropdown at bottom -->
+                <div class="fixed-bottom" style="width: 250px">
+                    <hr>
+                    <div class="dropdown admin-dropdown">
+                        <button class="btn btn-link text-decoration-none dropdown-toggle"
+                            type="button"
+                            id="adminDropdown"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="fas fa-user-shield ps-3 pe-2"></i>
+                            <asp:Label ID="lblUser" CssClass="fw-bold" Text="" runat="server" />
+                        </button>
+
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="adminDropdown">
+                            <li>
+                                <div class="dropdown-header">
+
+                                    <asp:Label CssClass="dropdown-item-text" ID="lblMail" Text="" runat="server" />
+
+                                </div>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="Profile.aspx">
+                                    <i class="fas fa-user me-2"></i>Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="Settings.aspx">
+                                    <i class="fas fa-cog me-2"></i>Settings
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <%--<span runat="server" id="lnkLogout" CssClass="text-decoration-none text-white dropdown-item"  OnClick="lnkLogout_Click"> LogOUT</span>--%>
+                                <asp:LinkButton ID="lnkLogout" CssClass="text-decoration-none text-white dropdown-item" runat="server" OnClick="lnkLogout_Click">
+                                     <i class="fas fa-sign-out-alt"></i> Logout
+                                </asp:LinkButton>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="header" style="width: 100%">
+                <div class="header-left">
+                    <asp:LinkButton class="menu-toggle" ID="menuToggle" OnClick="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </asp:LinkButton>
+                    <asp:ContentPlaceHolder ID="DashboardHeader" runat="server"></asp:ContentPlaceHolder>
+
+                </div>
+                <div class="header-right pe-5">
+                    <%--<div class="notification-icon ">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>--%>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main class="container-fluid p-4 bg-color">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+            </main>
+        </div>
+
+        <!-- Common Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+        <%--<script src="../../assets/js/custom.js"></script>--%>
+        <asp:ContentPlaceHolder ID="FooterScripts" runat="server"></asp:ContentPlaceHolder>
+    </form>
+    <script>
+
+        // Preloader
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                document.querySelector('.preloader').classList.add('hidden');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
+
